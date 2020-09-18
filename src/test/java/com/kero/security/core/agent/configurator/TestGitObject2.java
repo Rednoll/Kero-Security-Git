@@ -1,6 +1,6 @@
 package com.kero.security.core.agent.configurator;
 
-public class TestObject2 {
+public class TestGitObject2 {
 
 	private String kek;
 	

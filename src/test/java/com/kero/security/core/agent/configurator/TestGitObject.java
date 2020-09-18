@@ -1,8 +1,8 @@
 package com.kero.security.core.agent.configurator;
 
-public class TestObject {
+public class TestGitObject {
 
-	private TestObject2 obj2;
+	private TestGitObject2 obj2;
 	private String text;
 	
 	public String getText() {
@@ -10,7 +10,7 @@ public class TestObject {
 		return this.text;
 	}
 	
-	public TestObject2 getObj2() {
+	public TestGitObject2 getObj2() {
 		
 		return this.obj2;
 	}

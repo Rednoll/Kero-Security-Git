@@ -31,16 +31,16 @@ public class AccessAgentGitResourceConfiguratorTest {
 			
 		KeroAccessAgent agent = factory.create();
 		
-		TestObject ownerProtected = agent.protect(new TestObject(), "OWNER");
+		TestGitObject ownerProtected = agent.protect(new TestGitObject(), "OWNER");
 	
 		assertDoesNotThrow(ownerProtected::getText);
 		assertDoesNotThrow(ownerProtected::getObj2);
 	
-		TestObject msProtected = agent.protect(new TestObject(), "MS");
+		TestGitObject msProtected = agent.protect(new TestGitObject(), "MS");
 		
 		assertThrows(AccessException.class, msProtected::getObj2);
 		
-		TestObject2 obj2 = agent.protect(new TestObject2(), "OWNER");
+		TestGitObject2 obj2 = agent.protect(new TestGitObject2(), "OWNER");
 		
 		assertThrows(AccessException.class, obj2::getKek);
 	}
