@@ -99,7 +99,7 @@ public class GitRepositoryResource implements KsdlTextResource {
 				ObjectId id = TreeWalk.forPath(rep, path, commitTree).getObjectId(0);
 				
 				LOGGER.debug("Load scheme file: "+path);
-				builder.append(new String(rep.open(id).getBytes()));
+				builder.append(new String(rep.open(id).getBytes())+"\n");
 			}
 			
 			revWalk.close();
