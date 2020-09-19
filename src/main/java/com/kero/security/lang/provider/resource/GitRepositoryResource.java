@@ -82,17 +82,24 @@ public class GitRepositoryResource implements KsdlTextResource {
 				walker.addTree(commitTree);
 				walker.setRecursive(true);
 				walker.setFilter(walkerFilter);
+
+			List<String> paths = new ArrayList<>();
 				
-			int iterator = 0;
-			
 			LOGGER.debug("Begin scan repository.");
 			while(walker.next()) {
-	
-				ObjectId objectId = walker.getObjectId(iterator);
-				iterator++;
-	
-				LOGGER.debug("Found scheme file: "+walker.getPathString());
-				builder.append(new String(rep.open(objectId).getBytes()));
+				
+				String path = walker.getPathString();
+				
+				LOGGER.debug("Found scheme file: "+path);
+				paths.add(path);
+			}
+			
+			for(String path : paths) {
+				
+				ObjectId id = TreeWalk.forPath(rep, path, commitTree).getObjectId(0);
+				
+				LOGGER.debug("Load scheme file: "+path);
+				builder.append(new String(rep.open(id).getBytes()));
 			}
 			
 			revWalk.close();
