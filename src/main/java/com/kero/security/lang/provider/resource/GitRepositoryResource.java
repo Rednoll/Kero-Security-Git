@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.StringJoiner;
 
 import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;
@@ -43,9 +44,7 @@ public class GitRepositoryResource implements KsdlTextResource {
 	
 	@Override
 	public String getRawText() {
-		
-		StringBuilder builder = new StringBuilder();
-	
+
 		LOGGER.debug("Creating in memory Git repository.");
 		
 		DfsRepositoryDescription repDesc = new DfsRepositoryDescription();
@@ -94,24 +93,26 @@ public class GitRepositoryResource implements KsdlTextResource {
 				paths.add(path);
 			}
 			
+			StringJoiner fetchedData = new StringJoiner("\n");
+			
 			for(String path : paths) {
 				
 				ObjectId id = TreeWalk.forPath(rep, path, commitTree).getObjectId(0);
 				
 				LOGGER.debug("Load scheme file: "+path);
-				builder.append(new String(rep.open(id).getBytes())+"\n");
+				fetchedData.add(new String(rep.open(id).getBytes()));
 			}
 			
 			revWalk.close();
 			walker.close();
 			git.close();
+			
+			return fetchedData.toString();
 		}
 		catch(Exception e) {
 			
 			throw new RuntimeException(e);
 		}
-		
-		return builder.toString();
 	}
 	
 	private TreeFilter assemblyFilter() {
