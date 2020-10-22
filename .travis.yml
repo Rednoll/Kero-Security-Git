@@ -1,19 +1,20 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 
 before_install:
+  - echo ${KEY_VALUE} | base64 -d > pubring.gpg
   - chmod +x gradlew
-  
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - bash <(curl -Ls https://coverage.codacy.com/get.sh)
 
 deploy:
   provider: script
-  script: ./gradlew bintrayUpload
-  skip_cleanup: true # to upload artifacts created during the build
+  script: "./gradlew deploy -Psigning.keyId=${KEY_ID} -Psigning.password=${KEY_PASS} -Psigning.secretKeyRingFile=pubring.gpg"
+  skip_cleanup: true
   dry-run: false
   on:
-    tags: true
-    condition: "$TRAVIS_TAG =~ ^release@"
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ (.*@[0-9]+\.[0-9]+\.[0-9]+)|(master)

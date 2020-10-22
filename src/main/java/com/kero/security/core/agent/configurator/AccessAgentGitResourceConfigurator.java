@@ -7,7 +7,6 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 
 import com.kero.security.core.agent.KeroAccessAgent;
 import com.kero.security.core.agent.configuration.KeroAccessAgentConfigurator;
-import com.kero.security.core.scheme.configurator.KsdlAccessSchemeConfigurator;
 import com.kero.security.lang.provider.KsdlProvider;
 import com.kero.security.lang.provider.TextualProvider;
 import com.kero.security.lang.provider.resource.GitRepositoryResource;
@@ -52,6 +51,6 @@ public class AccessAgentGitResourceConfigurator implements KeroAccessAgentConfig
 			provider = KsdlProvider.addCacheWrap(provider);
 		}
 		
-		agent.addConfigurator(new KsdlAccessSchemeConfigurator(provider));
+		agent.addKsdlProvider(provider);
 	}
 }
