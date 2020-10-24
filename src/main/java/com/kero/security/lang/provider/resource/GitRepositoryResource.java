@@ -23,6 +23,8 @@ import org.eclipse.jgit.treewalk.filter.TreeFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.kero.security.ksdl.provider.resource.KsdlTextResource;
+
 public class GitRepositoryResource implements KsdlTextResource {
 
 	private static Logger LOGGER = LoggerFactory.getLogger("Kero-Security-Git");

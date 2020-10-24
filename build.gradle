@@ -67,6 +67,11 @@ description = 'Kero-Security-Git - integration Kero-Security with Git'
 repositories {
 
 	mavenCentral()
+	
+	maven {
+
+		url "https://oss.sonatype.org/content/repositories/snapshots"
+	}
 }
 
 dependencies {
@@ -83,7 +88,8 @@ dependencies {
 	
 	implementation 'org.eclipse.jgit:org.eclipse.jgit:[5.7,)'
 	
-	implementation 'com.github.rednoll:kero-security:[0.1.38,)'
+	implementation 'com.github.rednoll:kero-security:0.2.0-SNAPSHOT'
+	implementation 'com.github.rednoll:kero-security-ksdl:0.0.0-SNAPSHOT'
 }
 
 java {
