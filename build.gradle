@@ -89,7 +89,7 @@ dependencies {
 	implementation 'org.eclipse.jgit:org.eclipse.jgit:[5.7,)'
 	
 	implementation 'com.github.rednoll:kero-security:0.2.0-SNAPSHOT'
-	implementation 'com.github.rednoll:kero-security-ksdl:0.0.0-SNAPSHOT'
+	implementation 'com.github.rednoll:kero-security-ksdl:0.2.0-SNAPSHOT'
 }
 
 java {

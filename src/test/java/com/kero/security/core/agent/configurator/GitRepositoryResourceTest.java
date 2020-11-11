@@ -9,7 +9,9 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import com.kero.security.lang.provider.resource.GitRepositoryResource;
+import com.kero.security.ksdl.resource.additionals.ResourceAddress;
+import com.kero.security.lang.provider.resource.GitResource;
+import com.kero.security.lang.provider.resource.repository.TextResourceGitRepository;
 
 public class GitRepositoryResourceTest {
 
@@ -20,10 +22,14 @@ public class GitRepositoryResourceTest {
 			suffixes.add(".k-s");
 			suffixes.add(".ks");	
 		
-		GitRepositoryResource resource = new GitRepositoryResource(null, new URI("https://github.com/Rednoll/Kero-Security-TestGitRep.git"), "master", suffixes);
+		TextResourceGitRepository repository = new TextResourceGitRepository(null, new URI("https://github.com/Rednoll/Kero-Security-TestGitRep.git"), "master", suffixes);
 	
-		String rawText = resource.getRawText();
-	
-		assertEquals("kek\nlol", rawText);
+		GitResource<String> res1 = repository.getResource(new ResourceAddress("test scheme"));
+		GitResource<String> res2 = repository.getResource(new ResourceAddress("empty.file2"));
+		GitResource<String> res3 = repository.getResource(new ResourceAddress("empty.file3"));
+		
+		assertEquals(res1.readData(), "lol");
+		assertEquals(res2.readData(), "kek");
+		assertEquals(res3.readData(), "pek");
 	}
 }
