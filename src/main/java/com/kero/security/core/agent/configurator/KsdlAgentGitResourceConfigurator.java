@@ -6,10 +6,8 @@ import java.util.Set;
 import org.eclipse.jgit.transport.CredentialsProvider;
 
 import com.kero.security.ksdl.agent.KsdlAgent;
-import com.kero.security.ksdl.agent.configuration.KsdlAgentConfigurator;
-import com.kero.security.ksdl.reader.TextualReader;
-import com.kero.security.ksdl.resource.repository.KsdlResourceRepository;
-import com.kero.security.lang.provider.resource.repository.TextResourceGitRepository;
+import com.kero.security.ksdl.agent.configurator.KsdlAgentConfigurator;
+import com.kero.security.ksdl.resource.GitResource;
 
 public class KsdlAgentGitResourceConfigurator implements KsdlAgentConfigurator {
 	
@@ -30,8 +28,8 @@ public class KsdlAgentGitResourceConfigurator implements KsdlAgentConfigurator {
 	@Override
 	public void configure(KsdlAgent agent) {
 		
-		KsdlResourceRepository repository = new TextResourceGitRepository(credentialsProvider, remote, branch, suffixes);
+		GitResource resource = new GitResource(credentialsProvider, remote, branch, suffixes);
 		
-		agent.addReader(new TextualReader(repository));
+		agent.addResource(resource);
 	}
 }
